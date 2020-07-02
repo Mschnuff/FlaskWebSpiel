@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% if greeting and filename %}
+    I just wanted to say
+    <em style="color: green; font-size: 2em;">{{ greeting }}</em>.
+    <br/>
+    <br/>
+    Deine Datei
+    <em style="color: blue; font-size: 1.5em; font-family: Arial;">
+      {{ filename}}
+    </em>
+    wurde hochgeladen.
+{% elif greeting %}
+    <em>{{ greeting }}</em>! Da hat was nicht geklappt! :(
+{% else %}
+    Überhaupt nicht geklappt.
+{% endif %}
+
+{% endblock %}

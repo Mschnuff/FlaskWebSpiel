@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1>Fill Out This Form</h1>
+
+<!--<form action="/hello" method="POST">
+  A Greeting: <input type="text" name="greet" value="Hallo">
+  <br/>
+  Your Name: <input type="text" name="name" value="duda">
+  <br/>
+  <input type="submit" value="send greeting!">
+</form>
+<br/>
+<br/>-->
+<form action="/hello" method="POST" enctype="multipart/form-data">
+  A Greeting: <input type="text" name="greet" value="Hallo">
+  <br/>
+  Your Name: <input type="text" name="name" value="duda">
+  <br/>
+  <br/>
+  <label>Wählen Sie eine Textdatei oder Bilddatei (*.txt oder *.jpg)
+    <br/>
+    <br/>
+    <input name="datei" type="file" size="50">
+  </label>
+  <br/>
+  <br/>
+  <input type="submit" value="hochladen">
+  <!--<button>hochladen</button>-->
+</form>
+
+{% endblock %}

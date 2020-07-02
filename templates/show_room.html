@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container" style="padding: 20px 0 20px 0;">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="title col-lg-4">
+            <h1>{{ room.title }}</h1>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="inventar">Inventar:<br><br><ul>{% for gegenstand in inventar.inhalt %}<li>{{ gegenstand }}</li>{% endfor %}</ul></div>
+            <p style="margin-top: 200px; margin-bottom: 20px; color: #aaaaee;">Übersichtskarte:</p>
+            <img style="max-width: 100%;" src="static/Karte.png">
+        </div>
+        <div class="col-lg-8">
+            <div class="beschreibung">
+                <p> 
+                    {% if room.title=="Schatzkammer" %}
+                        {{ room.cur_description }}
+                        {% if "Kochtopf" not in inventar.inhalt %}
+                            {{ room.kochtopfdescription }}
+                        {% endif %}
+                        {{ room.addi_description }}
+                    {% else %}    
+                    {{ room.cur_description }}
+                    {{ room.isdeath }}
+                    {% endif %}
+                </p>
+            </div>
+{% if room.title in ["Tod", "Ende", "Verputzt", "Was zur Hölle"] %}
+    <a style="top:60%; left: 40%; padding: 2px 10px 0 10px;" href="/" class="button">Nocheinmal spielen?</a>
+
+{% elif room.title=="Rätselraum" and room.name=="puzzle" %}
+
+{% include "puzzle.html" %}
+
+{% elif room.title=="Kampf gegen die Orks" %}
+
+{% include "barracks_fight.html" %}
+
+{% elif room.title=="Silberne Tür" %}
+<form class="eingabeform" style="padding: 20px 0 20px 0;" action="/game" method="POST">
+    <div class="eingabecontainer">
+    <input class="button eingabe" name="naction" type="SUBMIT" value="zurück!">
+    {% if 'silberner Schlüssel' in inventar.inhalt %}
+    <span><input class="button eingabe" name="naction" type="SUBMIT" value="silbernen Schlüssel benutzen." style="left: 5%;"></span>
+    {% endif %}
+    </div>
+</form>
+
+{% elif room.title=="Goldene Tür" %}
+<form class="eingabeform" style="padding: 20px 0 20px 0;" action="/game" method="POST">
+    <div class="eingabecontainer">
+    <input class="button eingabe" name="naction" type="SUBMIT" value="zurück!">
+    {% if 'goldener Schlüssel' in inventar.inhalt %}
+    <span><input class="button eingabe" name="naction" type="SUBMIT" value="goldenen Schlüssel benutzen." style="left: 5%;"></span>
+    {% endif %}
+    </div>
+</form>
+    
+
+
+{% elif room.title in ["Sieg!", "Richtig!", "Ablenkung", "Flucht"] 
+or (room.title=="Barracke" and kampf.zuEnde==True) 
+or (room.title=="Rätselraum" and room.name=="puzzle_cleared") 
+or (room.name=="treasure_chamber_reward" or room.name=="treasure_chamber_reward2") %}
+
+<form class="eingabeform" style="padding: 20px 0 20px 0;" action="/game" method="POST">
+    <div class="eingabecontainer">
+    <input class="button eingabe" name="naction" type="SUBMIT" value="weiter!">
+    </div>
+</form>
+
+{% else %}
+    
+        
+            <form class="eingabeform" style="padding: 20px 0 20px 0;" action="/game" method="POST">
+                <div class="eingabecontainer">
+                <input class="eingabefeld" type="text" name="naction"><span><input class="button eingabe" type="SUBMIT" value="mache das!"></span>
+                </div>
+            </form>
+           
+    
+{% endif %}
+        </div>    
+        <div class="col-lg-2">
+            <p style="color: #aaaaee;">Anleitung:<br>
+                Gib Text in das Textfeld ein klicke anschließend auf <br>
+                "mache das!" <br>
+                Das Programm achtet auf bestimmte Schlüsselwörter,
+                akzeptiert aber auch ganze Sätze. <br>
+                In manchen Räumen muss aus einer Reihe von Optionen ausgewählt
+                werden bevor man auf den entsprechenden Button zum
+                Bestätigen klickt.
+            </p>
+        </div>
+    </div>
+</div>   
+
+
+{% endblock %}

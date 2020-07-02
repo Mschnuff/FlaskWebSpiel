@@ -1,0 +1,91 @@
+<div class="container-fluid">
+    <div class="row" style="min-height: 100px; ">
+        
+        <div class="col-lg-3">
+            {% if kampf.ork1.hitpoints>0 %}
+            <div class="ork">
+                <div class="ork hitpoints"></div>
+                <span class="ork hpbackg" style="width: {{ kampf.ork1.hp_inverse }}%;"></span>
+                <p class="ork name">{{ kampf.ork1.name }}: {{ kampf.ork1.hitpoints }}%</p>
+            </div>
+            {% endif %}
+        </div>        
+        <div class="col-lg-3">
+            {% if kampf.ork2.hitpoints>0 %}
+            <div class="ork">
+                <div class="ork hitpoints"></div>
+                <span class="ork hpbackg" style="width: {{ kampf.ork2.hp_inverse }}%;"></span>
+                <p class="ork name">{{ kampf.ork2.name }}: {{ kampf.ork2.hitpoints }}%</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-lg-3">
+            {% if kampf.ork3.hitpoints>0 %}      
+            <div class="ork">
+                <div class="ork hitpoints"></div>
+                <span class="ork hpbackg" style="width: {{ kampf.ork3.hp_inverse }}%;"></span>
+                <p class="ork name">{{ kampf.ork3.name }}: {{ kampf.ork3.hitpoints }}%</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-lg-3">
+            {% if kampf.ork4.hitpoints>0 %}         
+            <div class="ork">
+                <div class="ork hitpoints"></div>
+                <span class="ork hpbackg" style="width: {{ kampf.ork4.hp_inverse }}%;"></span>
+                <p class="ork name">{{ kampf.ork4.name }}: {{ kampf.ork4.hitpoints }}%</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% if kampf.curOrk==kampf.spieler %}
+
+        
+        <form class="eingabeform" id="quiz" action="/game" method="POST">
+            <div class="raetselcontainer" style="min-height: 200px;">
+            
+                {% if kampf.ork1.hitpoints>0 %}
+                    <label class="raetselopt" for="orkantwort-A">feigen Ork angreifen.
+                    <input type="radio" {% if kampf.ork1.checked %}checked{% endif %} name="orkantwort" id="orkantwort-A" value="0">
+                    <span class="auswahl"></span></label>
+                {% endif %}
+                {% if kampf.ork2.hitpoints>0 %}    
+                    <label class="raetselopt" for="orkantwort-B">fetten Ork angreifen.
+                    <input type="radio" {% if kampf.ork2.checked %}checked{% endif %} name="orkantwort" id="orkantwort-B" value="1">
+                    <span class="auswahl"></span></label>
+                {% endif %}
+                {% if kampf.ork3.hitpoints>0 %}
+                    <label class="raetselopt" for="orkantwort-C">hässlichen Ork angreifen. Er hat's verdient!
+                    <input type="radio" {% if kampf.ork3.checked %}checked{% endif %} name="orkantwort" id="orkantwort-C" value="2">
+                    <span class="auswahl"></span></label>
+                {% endif %}
+                {% if kampf.ork4.hitpoints>0 %}               
+                    <label class="raetselopt" for="orkantwort-D">hunrigen Ork angreifen.
+                    <input type="radio" {% if kampf.ork4.checked %}checked{% endif %} name="orkantwort" id="orkantwort-D" value="3">
+                    <span class="auswahl"></span></label>
+                {% endif %}
+                
+                    <label class="raetselopt" for="orkantwort-E">Dich selbst angreifen.
+                    <input type="radio" {% if kampf.spieler.checked %}checked{% endif %} name="orkantwort" id="orkantwort-E" value="4">
+                    <span class="auswahl"></span></label>
+                
+            <br>         
+            <button class="button" style="position: absolute; bottom: 10%;" name="naction" value="faust" type="submit">Faust benutzen!</button>
+            {% if 'Kochlöffel' in inventar.inhalt %}<span><button class="button" name="naction" value="loeffel" style="position: absolute; bottom: 10%; left: 25%;" type="submit">Kochlöffel benutzen!</button></span>{% endif %}
+            </div>
+        </form>
+   
+
+{% else %}
+<form class="eingabeform" action="/game" method="POST">
+    <div class="eingabecontainer" style="min-height: 200px;"><div class="beschreibung"><p>{{ kampf.curOrk.name }} greift dich an!</p></div>
+    <input class="button eingabe" name="naction" type="SUBMIT" style="left: 5%; top: 75%;" value="weiter!">
+    </div>
+</form>
+{% endif %}
+<div class="ork" style="margin-top:20px; width: 350px;">
+        <div class="ork hitpoints"></div>
+        <span class="ork hpbackg" style="width: {{ kampf.spieler.hp_inverse }}%;"></span>
+        <p class="ork name">{{ kampf.spieler.name }}: {{ kampf.spieler.hitpoints }}%</p>
+</div>

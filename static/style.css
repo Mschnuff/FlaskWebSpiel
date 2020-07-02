@@ -1,0 +1,202 @@
+/* ---- Grundlagen ---- */
+html {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #333355;
+    color: #aaaaee;
+    display:flex;
+    justify-content: center;
+   
+    
+}
+h1 {
+    
+    text-align: center;
+    font-size: 48px;
+   
+}
+
+p { 
+    white-space: pre-line;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #333355;
+    font-size: 16px;
+}
+.beschreibung {
+    background-color: #8888aa;
+    padding: 28px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+.container {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #333355;
+    color: #aaaaee;
+    justify-content: center;
+    
+}
+
+.container-fluid {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+   
+}
+.inventar {
+    font-size: 16px;
+    padding: 10px;
+    background-color: #8888aa;
+    color: #333355;
+    justify-content: center;
+    border-radius: 4px;
+    
+}
+
+.eingabecontainer {
+    align-items: center;
+    border-radius: 4px;
+    position: relative;
+    height: 100px;   
+    background-color: #8888aa;
+}
+.eingabeform {
+    
+    
+}
+.eingabeform input[type=radio] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+       
+}
+.eingabefeld {
+    left: 5%;
+    top: 35%;
+    position: absolute;
+    width: 70%;
+    border-radius: 2px;
+    background-color: #aaaaee;
+    height: 30px;
+    border: 0px;
+    font-size: 16px;
+    color:#333355;
+}
+
+
+.raetselcontainer {
+    border-radius: 4px;
+    background-color: #8888aa;
+    
+    padding: 20px;
+    position: relative;
+}
+
+.auswahl {
+   
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #666699;
+    border-radius: 20%;
+}
+.raetselopt {
+    color: #333355;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 5px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.raetselopt:hover input ~ .auswahl {
+    background-color: #333355;
+}
+.raetselopt input:checked ~ .auswahl {
+    background-color: #aaaaee;
+  }
+  
+  
+.auswahl:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+.raetselopt input:checked ~ .auswahl:after {
+    display: block;
+}
+  
+
+.raetselopt .auswahl:after {
+    top: 6px;
+    left: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 20%;
+    background: #eeeeff;
+  }
+
+.button {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 2px;
+    background-color: #666699;
+    border: none;
+    height: 30px;
+    color: #aaaaee;
+    font-size: 16px;
+}
+.button.eingabe {
+    top: 35%;
+    left: 80%;
+}
+
+a:hover {
+    text-decoration: none;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    vertical-align: middle;
+    align-items: center;
+}
+.button:hover {
+    background-color: #333355;
+    color: #eeeeff;
+}
+.ork {
+    position: relative;
+    text-align: center;
+    height: 60px;
+    background-color: #666699;
+    border-radius: 5px 5px 5px 5px;
+}
+.ork.name {
+    
+    padding-top:4px;
+    width: 100%;
+    background-color: #666699;
+    font-size: 16px;
+    color: #eeeeff;
+    height: 30px;
+    
+}
+.ork.hpbackg {
+    border-radius: 0px 0px 0px 0px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0%;
+    z-index: 1;
+    height: 30px;
+    background-color: #8888aa; 
+}
+.ork.hitpoints {
+    border-radius: 5px 5px 0px 0px;
+    width: 100%;
+    z-index: 0;
+    font-size: 20px;
+    height: 30px;
+    color: white;
+    background-image: linear-gradient(to right, red 0%, rgb(223, 193, 26) 50%, green 100%);
+}
